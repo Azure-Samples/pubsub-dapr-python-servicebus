@@ -1,0 +1,4 @@
+Flask
+dapr
+cloudevents
+uvicorn
