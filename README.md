@@ -1,57 +1,102 @@
-# Project Name
+# Dapr pub/sub
 
-(short, 1-3 sentenced, description of the project)
+In this quickstart, you'll create a publisher microservice and a subscriber microservice to demonstrate how Dapr enables a publish-subcribe pattern. The publisher will generate messages of a specific topic, while subscribers will listen for messages of specific topics. See [Why Pub-Sub](#why-pub-sub) to understand when this pattern might be a good choice for your software architecture.
 
-## Features
+For more details about this quickstart example please see the [Pub-Sub Quickstart documentation](https://docs.dapr.io/getting-started/quickstarts/pubsub-quickstart/).
 
-This project framework provides the following features:
+Visit [this](https://docs.dapr.io/developing-applications/building-blocks/pubsub/) link for more information about Dapr and Pub-Sub.
 
-* Feature 1
-* Feature 2
-* ...
+> **Note:** This example leverages the Dapr client SDK.  If you are looking for the example using only HTTP `requests` [click here](../http).
 
-## Getting Started
+This quickstart includes one publisher:
 
-### Prerequisites
+- Python client message generator `checkout` 
 
-(ideally very short, if any)
+And one subscriber: 
+ 
+- Python subscriber `order-processor`
 
-- OS
-- Library version
-- ...
+### Run Python message subscriber with Dapr
 
-### Installation
+1. Install dependencies: 
 
-(ideally very short)
+<!-- STEP
+name: Install python dependencies
+-->
 
-- npm install [package name]
-- mvn install
-- ...
+```bash
+cd ./order-processor
+pip3 install -r requirements.txt 
+```
 
-### Quickstart
-(Add steps to get up and running quickly)
+<!-- END_STEP -->
 
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
+2. Run the Python subscriber app with Dapr: 
 
+<!-- STEP
+name: Run python subscriber
+expected_stdout_lines:
+  - '== APP == Subscriber received : 4'
+  - "Exited App successfully"
+expected_stderr_lines:
+output_match_mode: substring
+working_dir: ./order-processor
+background: true
+sleep: 10
+-->
 
-## Demo
+```bash
+dapr run --app-id order-processor --components-path ../../../components/ --app-port 5001 -- uvicorn app:app
+```
 
-A demo app is included to show how to use the project.
+<!-- END_STEP -->
 
-To run the demo, follow these steps:
+### Run Python message publisher with Dapr
 
-(Add steps to start up the demo)
+3. Install dependencies: 
 
-1.
-2.
-3.
+<!-- STEP
+name: Install python dependencies
+-->
 
-## Resources
+```bash
+cd ./checkout
+pip3 install -r requirements.txt 
+```
+<!-- END_STEP -->
 
-(Any additional resources or related projects)
+4. Run the Python publisher app with Dapr: 
 
-- Link to supporting information
-- Link to similar sample
-- ...
+<!-- STEP
+name: Run python publisher
+expected_stdout_lines:
+  - '== APP == INFO:root:Published data: {"orderId": 1}'
+  - '== APP == INFO:root:Published data: {"orderId": 2}'
+  - "Exited App successfully"
+expected_stderr_lines:
+output_match_mode: substring
+working_dir: ./checkout
+background: true
+sleep: 10
+-->
+
+```bash
+dapr run --app-id checkout --components-path ../../../components/ -- python3 app.py
+```
+
+<!-- END_STEP -->
+
+```bash
+dapr stop --app-id checkout
+dapr stop --app-id order-processor
+```
+
+### Deploy to Azure (Azure Container Apps and Azure Service Bus)
+
+5. Deploy to Azure for dev-test
+
+NOTE: make sure you have Azure Dev CLI pre-reqs [here](https://github.com/Azure-Samples/todo-python-mongo-aca)
+
+```bash
+azd up
+```

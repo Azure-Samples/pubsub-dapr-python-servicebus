@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://azuresdkreleasepreview.blob.core.windows.net/azd/schema/azure.yaml.json
+
+name: pubsub-dapr-python-servicebus-aca
+metadata:
+  template: pubsub-dapr-python-servicebus-aca@0.0.1-beta
+services:
+  checkout:
+    project: checkout
+    dist: build
+    language: py
+    host: containerapp
+  orders:
+    project: order-processor
+    language: py
+    host: containerapp
