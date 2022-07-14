@@ -16,6 +16,16 @@ And one subscriber:
  
 - Python subscriber `order-processor`
 
+### Pre-requisites
+
+For this example, you will need:
+
+- [Dapr CLI](https://docs.dapr.io/getting-started).
+- [Python 3.7+](https://www.python.org/downloads/).
+<!-- IGNORE_LINKS --> 
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+<!-- END_IGNORE -->
+
 ### Run Python message subscriber with Dapr
 
 1. Install dependencies: 
@@ -46,7 +56,7 @@ sleep: 10
 -->
 
 ```bash
-dapr run --app-id order-processor --components-path ../../../components/ --app-port 5001 -- uvicorn app:app
+dapr run --app-id order-processor --components-path ../components/ --app-port 5001 -- python3 app.py
 ```
 
 <!-- END_STEP -->
@@ -81,7 +91,7 @@ sleep: 10
 -->
 
 ```bash
-dapr run --app-id checkout --components-path ../../../components/ -- python3 app.py
+dapr run --app-id checkout --components-path ../components/ -- python3 app.py
 ```
 
 <!-- END_STEP -->
