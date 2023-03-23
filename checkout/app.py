@@ -5,7 +5,8 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-for i in range(1, 10):
+while(True):
+  for i in range(1, 20):
     order = {'orderId': i}
 
     with DaprClient() as client:
@@ -19,3 +20,5 @@ for i in range(1, 10):
 
     logging.info('Published data: ' + json.dumps(order))
     time.sleep(1)
+
+  time.sleep(10)
