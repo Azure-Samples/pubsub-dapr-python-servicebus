@@ -9,7 +9,9 @@ services:
     dist: build
     language: py
     host: containerapp
+    module: app/checkout
   orders:
     project: order-processor
     language: py
     host: containerapp
+    module: app/orders

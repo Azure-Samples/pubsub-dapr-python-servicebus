@@ -5,20 +5,20 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-while(True):
-  for i in range(1, 20):
-    order = {'orderId': i}
+while (True):
+    for i in range(1, 20):
+        order = {'orderId': i}
 
-    with DaprClient() as client:
-        # Publish an event/message using Dapr PubSub
-        result = client.publish_event(
-            pubsub_name='orderpubsub',
-            topic_name='orders',
-            data=json.dumps(order),
-            data_content_type='application/json',
-        )
+        with DaprClient() as client:
+            # Publish an event/message using Dapr PubSub
+            result = client.publish_event(
+                pubsub_name='orderpubsub',
+                topic_name='orders',
+                data=json.dumps(order),
+                data_content_type='application/json',
+            )
 
-    logging.info('Published data: ' + json.dumps(order))
-    time.sleep(1)
+        logging.info('Published data: ' + json.dumps(order))
+        time.sleep(1)
 
-  time.sleep(10)
+    time.sleep(10)
