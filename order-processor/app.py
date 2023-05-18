@@ -8,6 +8,7 @@ app_port = os.getenv('APP_PORT', '5001')
 pubsub_name = 'orderpubsub'
 pubsub_topic = 'orders'
 
+
 # Register Dapr pub/sub subscriptions
 @app.route('/dapr/subscribe', methods=['GET'])
 def subscribe():
@@ -29,4 +30,4 @@ def orders_subscriber():
         'ContentType': 'application/json'}
 
 
-app.run(port=app_port)
+app.run(port=app_port, host="0.0.0.0")
