@@ -8,7 +8,6 @@ products:
 - azure
 - azure-container-apps
 - azure-service-bus
-- dapr
 urlFragment: pubsub-dapr-python-servicebus
 name: Microservice communication using pubsub (async)(Python)
 description: Create a publisher microservice and a subscriber microservice with Python to demonstrate how Dapr enables a publish-subcribe pattern. The publisher will generate messages of a specific topic, while subscribers will listen for messages of specific topics. 
